@@ -1,13 +1,15 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "../live";
 
-// Export the query at top-level so Sanity typegen can detect the projection
-export const ALL_CATEGORIES_QUERY = defineQuery(`
-  *[_type == "category"] { _id, title, slug } | order(title asc)
-`);
-
 // Function to get all categories
 export const getAllCategories = async () => {
+  // Execute Query
+  const ALL_CATEGORIES_QUERY = defineQuery(`
+    // *[_type == "category"] { _id, title, slug } | order(title asc)
+    *[_type == "category"] | order(name asc)
+
+  `);
+
   try {
     // Use sanityFetch to send the query
     const categories = await sanityFetch({

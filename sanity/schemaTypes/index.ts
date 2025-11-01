@@ -4,6 +4,8 @@ import {TagIcon} from "@sanity/icons";
 import { blockContent } from './blockContentTypes'
 import { orderType } from './orderType';
 import { salesType } from './salesType';
+import { defineField } from 'sanity';
+
 
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -28,14 +30,15 @@ export const schema: { types: SchemaTypeDefinition[] } = {
       fields: [
         { name: 'title', type: 'string', title: 'Title' },
         // Add a slug field so categories can have SEO-friendly URLs.
-        { name: 'slug', type: 'slug', title: 'Slug', options: { source: 'title' } },
+        defineField({ name: 'slug', type: 'slug', title: 'Slug', options: { source: 'title' }, }),
         { name: 'description', type: 'text', title: 'Description' }
       ],
        preview: {
         select: {
-            title: "name",
+            title: "title",
             media: "image",
             price: "price",
+            subtitle: "description",
         },
       }
     },
